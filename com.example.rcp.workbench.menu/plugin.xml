@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               id="configure"
+               label="Configure">
+            <separator
+                  name="securityAdditions"
+                  visible="false">
+            </separator>
+            <separator
+                  name="configure.sep1"
+                  visible="true">
+            </separator>
+            <separator
+                  name="additions"
+                  visible="false">
+            </separator>
+         </menu>
+         <menu
+               id="example"
+               label="Example">
+            <separator
+                  name="exampleexplorer"
+                  visible="false">
+            </separator>
+         </menu>
+      </menuContribution>
+   </extension>
+
+</plugin>

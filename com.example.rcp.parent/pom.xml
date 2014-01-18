@@ -1,0 +1,97 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.example.rcp</groupId>
+	<artifactId>com.example.rcp.parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<tycho-version>0.19.0</tycho-version>
+		<java.compiler.source>1.7</java.compiler.source>
+		<java.compiler.target>1.7</java.compiler.target>
+		<build.qualifier>yyyyMMddHHmm</build.qualifier>
+		<build.qualifier.format>${build.qualifier}</build.qualifier.format>
+		<dependency.maven-compiler-plugin.version>3.0</dependency.maven-compiler-plugin.version>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${dependency.maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>${java.compiler.source}</source>
+					<target>${java.compiler.target}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			<!-- Generates the build qualifier and exposes a property named 'buildQualifier' -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-packaging-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>build-qualifier</id>
+						<goals>
+							<goal>build-qualifier</goal>
+						</goals>
+						<phase>validate</phase>
+						<configuration>
+							<format>${build.qualifier.format}</format>
+						</configuration>
+					</execution>
+					<execution>
+						<id>packaging</id>
+						<configuration>
+							<archive>
+								<addMavenDescriptor>false</addMavenDescriptor>
+							</archive>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<resolver>p2</resolver>
+					<target>
+						<artifact>
+							<groupId>com.example.rcp</groupId>
+							<artifactId>com.example.rcp.parent</artifactId>
+							<version>0.0.1-SNAPSHOT</version>
+							<classifier>example</classifier>
+						</artifact>
+					</target>
+					<environments>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
+					</environments>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<modules>
+		<module>../com.example.rcp.workbench</module>
+		<module>../com.example.rcp.workbench.menu</module>
+		<module>../com.example.rcp.workbench.feature</module>
+		<module>../com.example.rcp.workbench.explorer</module>
+<!-- 		<module>../com.example.rcp.workbench.explorer.feature</module> -->
+		<!-- <module>../com.example.rcp.workbench.repository</module> -->
+		<module>../com.example.rcp.workbench.product</module>
+	</modules>
+</project>

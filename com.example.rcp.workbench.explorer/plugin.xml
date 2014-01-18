@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="Example Explorer"
+            id="com.example.rcp.workbench.explorer">
+      </category>
+      <view
+            name="Example Explorer"
+            icon="icons/sample.gif"
+            category="com.example.rcp.workbench.explorer"
+            class="com.example.rcp.workbench.explorer.internal.views.ExampleExplorerView"
+            id="com.example.rcp.workbench.explorer.views.ExampleExplorerView">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            id="com.example.rcp.workbench.explorer.commands"
+            name="Example Explorer">
+      </category>
+      <command
+            categoryId="com.example.rcp.workbench.explorer.commands"
+            id="com.example.rcp.workbench.explorer.commands.fakeCommand"
+            name="Fake Command">
+      </command>
+      <command
+            categoryId="com.example.rcp.workbench.explorer.commands"
+            id="com.example.rcp.workbench.explorer.commands.openExampleExplorerPerspectiveCommand"
+            name="Example Explorer">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="com.example.rcp.workbench.explorer.internal.handlers.FakeHandler"
+            commandId="com.example.rcp.workbench.explorer.commands.fakeCommand">
+      </handler>
+      <handler
+            class="com.example.rcp.workbench.explorer.internal.handlers.ShowExampleExplorerPerspectiveHandler"
+            commandId="com.example.rcp.workbench.explorer.commands.openExampleExplorerPerspectiveCommand">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:configure?after=additions">
+         <command
+               commandId="com.example.rcp.workbench.explorer.commands.fakeCommand"
+               label="Fake Command"
+               style="push">
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:example?after=exampleexplorer">
+         <command
+               commandId="com.example.rcp.workbench.explorer.commands.openExampleExplorerPerspectiveCommand"
+               label="Example Explorer"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="com.example.rcp.workbench.explorer.internal.perspectives.ExampleExplorerPerspective"
+            icon="icons/sample.gif"
+            id="com.example.rcp.workbench.explorer.perspectives.ExampleExplorer"
+            name="Example Explorer">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="com.example.rcp.workbench.explorer.perspectives.ExampleExplorer">
+         <view
+               id="com.example.rcp.workbench.explorer.views.ExampleExplorerView"
+               minimized="false"
+               ratio="0.35"
+               relationship="left"
+               relative="org.eclipse.ui.editorss"
+               visible="true">
+         </view>
+         <view
+               id="org.eclipse.ui.navigator.ProjectExplorer"
+               minimized="false"
+               relationship="stack"
+               relative="com.example.rcp.workbench.explorer.views.ExampleExplorerView">
+         </view>
+         <view
+               id="org.eclipse.ui.console.ConsoleView"
+               minimized="false"
+               ratio="0.75"
+               relationship="bottom"
+               relative="org.eclipse.ui.editorss">
+         </view>
+         <view
+               id="org.eclipse.ui.views.PropertySheet"
+               minimized="false"
+               relationship="stack"
+               relative="org.eclipse.ui.console.ConsoleView">
+         </view>
+         <viewShortcut
+               id="com.example.rcp.workbench.explorer.views.ExampleExplorerView">
+         </viewShortcut>
+         <viewShortcut
+               id="org.eclipse.ui.console.ConsoleView">
+         </viewShortcut>
+         <viewShortcut
+               id="org.eclipse.ui.views.PropertySheet">
+         </viewShortcut>
+         <viewShortcut
+               id="org.eclipse.ui.navigator.ProjectExplorer">
+         </viewShortcut>
+      </perspectiveExtension>
+   </extension>
+
+</plugin>
